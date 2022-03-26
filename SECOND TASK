@@ -1,0 +1,38 @@
+CREATE TABLE Products (
+id_product INT PRIMARY KEY,
+name_product TEXT
+);
+
+INSERT INTO Products
+VALUES (1, 'Cheese'), (2, 'Chees'), (3, 'Chocolate');
+
+CREATE TABLE Categories (
+id_categoty INT PRIMARY KEY,
+name_categoty TEXT
+);
+
+INSERT INTO Categories
+VALUES
+(1, 'food'),
+(2, 'food2'),
+(3, 'games');
+
+CREATE TABLE Product_Categories (
+P_Id INT FOREIGN KEY REFERENCES Products(id_product),
+C_Id INT FOREIGN KEY REFERENCES Categories(id_categoty),
+PRIMARY KEY (P_Id, C_Id)
+);
+
+INSERT INTO ProductCategories
+VALUES
+(1, 1),
+(2, 3),
+(3, 3);
+
+SELECT Products.name_product, Categories."Name"
+FROM Products
+LEFT JOIN ProductCategories
+ON Products.id_product = ProductCategories.P_Id
+LEFT JOIN Categories
+ON Categories.id_categoty = ProductCategories.C_Id;
+
